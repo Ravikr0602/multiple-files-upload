@@ -1,0 +1,52 @@
+<?php
+$date = new DateTime();
+$nextHour = (intval($date->format('H'))+1) % 24;
+echo $nextHour.':00'; // 5
+?>
+
+<?php
+$start = "09:00";
+$end = "20:00";
+
+$tStart = strtotime($start);
+$tEnd = strtotime($end);
+$tNow = $tStart;
+?>
+<select name="callbacktime" id="callbacktime">
+<?php 
+while($tNow <= $tEnd){
+  echo '<option value='.date("H:i",$tNow).'>'.date("H:i",$tNow).'</option>';
+  $tNow = strtotime('+1 hour',$tNow);
+}
+?>
+</select>
+
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+jqery time
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+<input type="text" name="selecthour" class="control" id="time" />
+
+<script>
+$(document).ready(function(){
+    $('#time').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 90,
+        minTime: '10',
+        // minTime: 'now',
+        maxTime: '22',
+        startTime: '10',
+        scrollbar: true,
+        'disableTimeRanges': [['10am', new Date()]]
+    });
+});
+
+
+</script>
